@@ -6,7 +6,18 @@ import Image
 import magic
 
 from werkzeug import FileWrapper, Response
+from pymongo.objectid import ObjectId
 import gridfs
+
+def document(request, document_id):
+    collection = request.db.images.files
+    obj = collection.find_one({'_id': ObjectId(document_id)})
+    if obj['metadata'] is None:
+        obj['metadata'] = {}
+    if request.method == "POST":
+        obj['metadata'].update(request.form)
+        collection.save(obj)
+    return obj
 
 def serve_pil(image, extension):
     resp = Response()
@@ -34,13 +45,18 @@ def upload_images(request):
         assert content_type.startswith('image')
         request.fs.put(file,
                        content_type=content_type,
-                       filename=file.filename)
+                       filename=file.filename,
+                       metadata={})
         file.close()
 
     return {'message': "Uploaded!"}
 
 def list_images(request):
     return {'images': request.fs.list()}
+
+def image(request, filename):
+    gridimage = request.fs.get_last_version(filename)
+    return {'filename': filename, 'gridimage': gridimage}
 
 def view_image(request, filename):
     thumbs = request.fs['thumbnails']

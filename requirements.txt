@@ -1,0 +1,5 @@
+pymongo==1.6
+jinja2
+Werkzeug
+PIL
+python-magic

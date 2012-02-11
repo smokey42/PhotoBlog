@@ -1,0 +1,7 @@
+{% macro display_image(image) %}
+<li>
+    <a href="/image/{{ image }}">
+        <img src="/images/{{ image }}?height=200">
+    </a>
+</li>
+{% endmacro -%}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" media="all" href="/shared/css/960/code/css/reset.css">
+    <link rel="stylesheet" type="text/css" media="all" href="/shared/css/960/code/css/text.css">
+    <link rel="stylesheet" type="text/css" media="all" href="/shared/css/960/code/css/960.css">
+    <style type="text/css" title="Standarstil" media="screen">
+        @import "/shared/css/styles.css";
+    </style>
+    <script src="/shared/js/cufon-yui.js" type="text/javascript"></script>
+    <script src="/shared/fonts/Museo300-Regular.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        Cufon.replace('h1')('h2');
+    </script>
+<head>
+{% macro navlink(href, text, class="") -%}
+{%- if request.path == href -%}
+    {%- set class = class + " active" -%}
+{% endif -%}
+<a href="{{ href }}" class="{{class|trim}}">{{ text }}</a>
+{%- endmacro %}
+
+<body id="body_{{endpoint}}" class="container_12">
+    <div id="nav">
+        <div id="logo">Logo</div>
+        <ul>
+            <li>{{ navlink("/", "Home") }}</li>
+            <li>{{ navlink("/images/", "Images") }}</li>
+            <li>{{ navlink("/impressum/", "About") }}</li>
+        </ul>
+    </div>
+    <h1 class="grid_10">{% block headline %}{% endblock %}</h1>
+    <div class="grid_2">{% block tools %}{% endblock %}</div>
+    <div class="grid_12">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

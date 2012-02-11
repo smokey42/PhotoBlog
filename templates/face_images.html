@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% from "macros.html" import display_image %}
+
+{% block content %}
+{% for face in faces %}
+{{ face.x }} {{ face.y }}
+{% endfor %}
+{{ display_image(image) }}
+{% endblock %}

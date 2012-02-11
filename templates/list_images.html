@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% from "macros.html" import display_image %}
+
+{% block tools %}
+<a href="/images/upload">Bild hochladen</a>
+{% endblock %}
+
+{% block headline %}
+Bilderliste
+{% endblock %}
+
+{% block content %}
+{% for image in images %}
+{% if loop.first %}<ul id="images">{% endif %}
+{{ display_image(image) }}
+{% if loop.last %}</ul>{% endif %}
+{% endfor %}
+{% endblock %}

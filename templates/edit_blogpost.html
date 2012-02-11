@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<script src="/shared/ckeditor/ckeditor.js" type="text/javascript"></script>
+<form method="POST">
+<fieldset>
+{% for field in form %}
+<div>{{ field.label }} {{ field }}</div>
+{% endfor %}
+<input type="submit">
+</fieldset>
+</form>
+
+<script type="text/javascript">
+    CKEDITOR.replace('body');
+</script>
+{% endblock %}

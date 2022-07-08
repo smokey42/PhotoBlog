@@ -1,4 +1,4 @@
-pymongo==1.6
+pymongo==2.5.2
 jinja2
 Werkzeug
 PIL
